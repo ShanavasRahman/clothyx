@@ -4,10 +4,12 @@ const mongoose = require("mongoose");
 require('dotenv').config();
 const adminSetupRouter = require('./Admin/routes/adminSetupRouter');
 const userSetupRouter = require('./User/routes/userSetupRouter');
+const { swaggerUi, swaggerSpec } = require('./swagger');
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/admin", adminSetupRouter);
 app.use("/user", userSetupRouter);
 
